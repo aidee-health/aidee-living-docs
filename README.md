@@ -19,21 +19,12 @@
 
 ## Features
 
-- Connects to an EmBody device over the serial port
-- Uses the EmBody protocol to communicate with the device
-- Integrates with [the EmBody Protocol Codec](https://github.com/aidee-health/embody-protocol-codec) project
-- Asynchronous send without having to wait for response
-- Synchronous send where response message is returned
-- Send facade for protocol agnostic communication with device
-- Provides callback interfaces for incoming messages, response messages and connect/disconnect
-- All methods and callbacks are threadsafe
-- Separate threads for send, receive and callback processing
+- Helper functions to generate living documentation with Sphinx and Behave
 - Type safe code using [mypy](https://mypy.readthedocs.io/) for type checking
 
 ## Requirements
 
-- Python 3.9
-- Access to private Aidee Health repositories on Github
+- Python 3.9-3.11
 
 ## Installation
 
