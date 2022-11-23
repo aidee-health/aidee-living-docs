@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aidee-living-docs"
-version = "1.0.0"
+version = "1.0.1"
 description = "Helpers for generating living documentation with Sphinx and Behave"
 authors = ["Aidee Health AS <hello@aidee.io>"]
 license = "MIT"
