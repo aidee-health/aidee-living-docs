@@ -1,5 +1,5 @@
 """Dummy test make tests and typeguard sessions work."""
 
 
-def dummy_test() -> None:
+def test_dummy() -> None:
     pass
