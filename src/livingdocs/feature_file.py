@@ -6,7 +6,7 @@ from os import path
 from .collecting_formatter import CollectedFeature
 
 
-def load_feature_file(feature_path: path.StrPath):
+def load_feature_file(feature_path: str):
     """Load a BDD feature file."""
     if not path.exists(feature_path):
         print("Unable to find feature file\n")
@@ -16,7 +16,7 @@ def load_feature_file(feature_path: path.StrPath):
         return CollectedFeature.from_json(json.load(file))
 
 
-def load_all_feature_files_in_directory(featurespath: path.StrPath):
+def load_all_feature_files_in_directory(featurespath: str):
     """Load all BDD feature files in directory."""
     files = glob(path.join(featurespath, "*.json"))
 

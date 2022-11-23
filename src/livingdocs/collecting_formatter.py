@@ -39,7 +39,7 @@ class CollectedScenario:
         name: str,
         tags: list[str],
         status: str = "not run",
-        steps: list[CollectedStep] = None,
+        steps: Optional[list[CollectedStep]] = None,
     ):
         self.name = name
         self.tags: list[str] = tags
@@ -61,14 +61,12 @@ class CollectedRule:
         name: str,
         description: list[str],
         tags: list[str],
-        scenarios: list[CollectedScenario] = None,
+        scenarios: Optional[list[CollectedScenario]] = None,
     ):
         self.name = name
         self.description: list[str] = description
         self.tags: list[str] = tags
-        self.scenarios: list[CollectedScenario] = (
-            [] if (scenarios is None) else scenarios
-        )
+        self.scenarios: list[CollectedScenario] = scenarios if scenarios else []
 
     @classmethod
     def from_json(cls, data):
@@ -120,13 +118,13 @@ class CollectingFormatter(Formatter):
     def __init__(self, stream_opener, config):
         super().__init__(stream_opener, config)
 
-        self.current_feature: CollectedFeature = None
-        self.current_rule: CollectedRule = None
-        self.current_scenario: CollectedScenario = None
-        self.current_step: CollectedStep = None
+        self.current_feature: Optional[CollectedFeature] = None
+        self.current_rule: Optional[CollectedRule] = None
+        self.current_scenario: Optional[CollectedScenario] = None
+        self.current_step: Optional[CollectedStep] = None
 
-        self.steps_to_process: list[CollectedStep] = []
-        self.current_step_text: list[str] = []
+        self.steps_to_process: list[CollectedStep] = list()
+        self.current_step_text: list[str] = list()
 
     def write_function(self):
         def formatter_write_line(*values, sep=""):
@@ -150,16 +148,17 @@ class CollectingFormatter(Formatter):
 
     def scenario(self, scenario: Scenario):
         self.current_scenario = CollectedScenario(scenario.name, scenario.tags)
-        if self.current_rule is None:
+        if not self.current_rule:
+            assert self.current_feature
             self.current_feature.scenarios.append(self.current_scenario)
         else:
             self.current_rule.scenarios.append(self.current_scenario)
-
         self.steps_to_process = []
 
     def step(self, step: Step):
         """Append step to scenario."""
         step_to_store = CollectedStep(step.name, step.keyword)
+        assert self.current_scenario
         self.current_scenario.steps.append(step_to_store)
 
         self.steps_to_process.append(step_to_store)
