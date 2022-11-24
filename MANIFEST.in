@@ -1,0 +1,4 @@
+include src/livingdocs/feature.jinja2
+include src/livingdocs/scenario.jinja2
+include src/livingdocs/userneeds.jinja2
+include src/livingdocs/userneeds_trace.jinja2
