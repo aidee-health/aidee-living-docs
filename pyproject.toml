@@ -18,7 +18,7 @@ classifiers = [
 Changelog = "https://github.com/aidee-health/aidee-living-docs/releases"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<=3.11"
+python = ">=3.9,<4.0"
 behave = "^1.2.6"
 
 [tool.poetry.dev-dependencies]
