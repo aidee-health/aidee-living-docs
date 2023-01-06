@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aidee-living-docs"
-version = "1.0.1"
+version = "1.0.2"
 description = "Helpers for generating living documentation with Sphinx and Behave"
 authors = ["Aidee Health AS <hello@aidee.io>"]
 license = "MIT"
@@ -22,6 +22,7 @@ python = ">=3.9,<4.0"
 behave = "^1.2.6"
 
 [tool.poetry.dev-dependencies]
+pytest = ">=7.2.0"
 Pygments = ">=2.10.0"
 black = ">=21.10b0"
 coverage = {extras = ["toml"], version = ">=6.2"}
