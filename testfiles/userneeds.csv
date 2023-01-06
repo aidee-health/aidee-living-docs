@@ -1,0 +1,7 @@
+ID	Description
+UN_0001	A worker is notified when they are approaching a hazard
+UN_0002	The worker can check the remaining battery level of the HPAS device
+UN_3.2	The device shall provide a LED indication of low battery level
+UN_24.10	Temperature safety
+UN_SYS_7,The device shall support different skin and body types
+UN_SYS_25,The system shall minimize the possibilities of erroneous use
