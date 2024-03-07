@@ -1,4 +1,5 @@
 """Create Sphinx compatible feature page."""
+
 import pathlib
 import sys
 from glob import glob

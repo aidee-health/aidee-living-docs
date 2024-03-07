@@ -1,4 +1,5 @@
 """Implement Formatter functionality for Behave."""
+
 import time
 from itertools import chain
 from typing import Optional

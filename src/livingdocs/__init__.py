@@ -1,4 +1,5 @@
 """Initialize the livingdocs package."""
+
 import importlib.metadata
 
 from .json_formatter import JSONFormatter

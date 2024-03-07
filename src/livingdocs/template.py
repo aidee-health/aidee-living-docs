@@ -1,4 +1,5 @@
 """Template module using jinja2."""
+
 import pathlib
 
 from jinja2 import Environment

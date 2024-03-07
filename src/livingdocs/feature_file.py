@@ -1,4 +1,5 @@
 """Module for creating a BDD feature file."""
+
 import json
 from glob import glob
 from os import path
