@@ -1,4 +1,5 @@
 """Sphinx configuration."""
+
 project = "Aidee Living Documentation Helpers"
 author = "Aidee Health"
 copyright = "2022, Aidee Health"

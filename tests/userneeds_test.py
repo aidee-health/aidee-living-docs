@@ -1,4 +1,5 @@
 """Test parsing from file."""
+
 import pytest
 
 from livingdocs.userneeds import load_userneeds_from_file
