@@ -1,4 +1,5 @@
 """Module for generating user needs page."""
+
 import sys
 
 from .template import convert_template

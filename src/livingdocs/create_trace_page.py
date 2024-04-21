@@ -1,4 +1,5 @@
 """Create traceability. Link scenarios with status to user needs."""
+
 import sys
 
 from .collecting_formatter import CollectedScenario

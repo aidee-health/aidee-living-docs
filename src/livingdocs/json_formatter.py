@@ -1,4 +1,5 @@
 """Behave JSONFormatter."""
+
 import json
 from os import path
 
