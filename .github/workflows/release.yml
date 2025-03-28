@@ -28,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Upgrade pip
         run: |
@@ -38,6 +38,7 @@ jobs:
       - name: Install Poetry
         run: |
           pip install --constraint=${{ github.workspace }}/.github/workflows/constraints.txt poetry
+          pip install --constraint=${{ github.workspace }}/.github/workflows/constraints.txt poetry-plugin-export
           poetry --version
 
       - name: Check if there is a parent commit
