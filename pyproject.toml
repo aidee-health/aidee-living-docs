@@ -1,6 +1,6 @@
 [project]
 name = "aidee-living-docs"
-version = "1.0.5"
+version = "1.0.6"
 description = "Helpers for generating living documentation with Sphinx and Behave"
 authors = [{name = "Aidee Health AS", email = "hello@aidee.io"}]
 license = "MIT"
