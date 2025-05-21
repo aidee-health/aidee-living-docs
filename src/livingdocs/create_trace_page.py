@@ -9,16 +9,12 @@ from .template import convert_template
 from .userneeds import load_userneeds_from_file
 
 
-def add_scenario_to_userneed(
-    userneeds, user_need_id, scenario_id, scenario_name, result
-):
+def add_scenario_to_userneed(userneeds, user_need_id, scenario_id, scenario_name, result):
     """Add scenario to proper user need."""
     user_need_id = user_need_id.lower()
     for userneed in userneeds:
         if userneed["id"].lower() == user_need_id:
-            userneed["scenarios"].append(
-                {"id": scenario_id, "name": scenario_name, "result": result}
-            )
+            userneed["scenarios"].append({"id": scenario_id, "name": scenario_name, "result": result})
 
 
 def userneed_id_for_scenario(scenario: CollectedScenario):
@@ -46,10 +42,10 @@ def main(args=None):
 
     if len(args) != 4:
         print(
-            "Invalid command format, format is:\n {a[0]} <userneed text file> "
-            "<path to feature file results> <output file>\n".format(a=args)
+            f"Invalid command format, format is:\n {args[0]} <userneed text file> "
+            "<path to feature file results> <output file>\n"
         )
-        exit(1)
+        sys.exit(1)
 
     userneeds = load_userneeds_from_file(args[1])
     for userneed in userneeds:

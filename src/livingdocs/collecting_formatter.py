@@ -2,7 +2,6 @@
 
 import time
 from itertools import chain
-from typing import Optional
 
 from behave.formatter.base import Formatter
 from behave.model import Feature
@@ -17,8 +16,8 @@ class CollectedStep:
         self,
         name: str,
         step_type: str,
-        text: Optional[list[str]] = None,
-        error_message: Optional[list[str]] = None,
+        text: list[str] | None = None,
+        error_message: list[str] | None = None,
         status: str = "not run",
     ):
         self.name = name
@@ -40,7 +39,7 @@ class CollectedScenario:
         name: str,
         tags: list[str],
         status: str = "not run",
-        steps: Optional[list[CollectedStep]] = None,
+        steps: list[CollectedStep] | None = None,
     ):
         self.name = name
         self.tags: list[str] = tags
@@ -62,7 +61,7 @@ class CollectedRule:
         name: str,
         description: list[str],
         tags: list[str],
-        scenarios: Optional[list[CollectedScenario]] = None,
+        scenarios: list[CollectedScenario] | None = None,
     ):
         self.name = name
         self.description: list[str] = description
@@ -85,10 +84,10 @@ class CollectedFeature:
         name: str,
         description: list[str],
         tags: list[str],
-        start_time: Optional[float] = None,
+        start_time: float | None = None,
         run_time: float = 0,
-        scenarios: Optional[list[CollectedScenario]] = None,
-        rules: Optional[list[CollectedRule]] = None,
+        scenarios: list[CollectedScenario] | None = None,
+        rules: list[CollectedRule] | None = None,
     ):
         self.file_name = file_name
         self.name = name
@@ -96,9 +95,7 @@ class CollectedFeature:
         self.tags: list[str] = tags
         self.start_time = start_time if start_time else time.time()
         self.run_time = run_time
-        self.scenarios: list[CollectedScenario] = (
-            [] if (scenarios is None) else scenarios
-        )
+        self.scenarios: list[CollectedScenario] = [] if (scenarios is None) else scenarios
         self.rules: list[CollectedRule] = [] if (rules is None) else rules
 
     def finished(self):
@@ -119,13 +116,13 @@ class CollectingFormatter(Formatter):
     def __init__(self, stream_opener, config):
         super().__init__(stream_opener, config)
 
-        self.current_feature: Optional[CollectedFeature] = None
-        self.current_rule: Optional[CollectedRule] = None
-        self.current_scenario: Optional[CollectedScenario] = None
-        self.current_step: Optional[CollectedStep] = None
+        self.current_feature: CollectedFeature | None = None
+        self.current_rule: CollectedRule | None = None
+        self.current_scenario: CollectedScenario | None = None
+        self.current_step: CollectedStep | None = None
 
-        self.steps_to_process: list[CollectedStep] = list()
-        self.current_step_text: list[str] = list()
+        self.steps_to_process: list[CollectedStep] = []
+        self.current_step_text: list[str] = []
 
     def write_function(self):
         def formatter_write_line(*values, sep=""):
@@ -136,9 +133,7 @@ class CollectingFormatter(Formatter):
         return formatter_write_line
 
     def feature(self, feature: Feature):
-        self.current_feature = CollectedFeature(
-            feature.filename, feature.name, feature.description, feature.tags
-        )
+        self.current_feature = CollectedFeature(feature.filename, feature.name, feature.description, feature.tags)
 
     def rule(self, rule):
         self.current_rule = CollectedRule(rule.name, rule.description, rule.tags)

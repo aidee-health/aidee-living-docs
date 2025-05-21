@@ -12,12 +12,8 @@ def main(args=None):
         args = sys.argv
 
     if len(args) != 3:
-        print(
-            "Invalid command format, format is:\n {a[0]} <userneed text file> <userneeds sphinx file>\n".format(
-                a=args
-            )
-        )
-        exit(1)
+        print(f"Invalid command format, format is:\n {args[0]} <userneed text file> <userneeds sphinx file>\n")
+        sys.exit(1)
 
     userneeds = load_userneeds_from_file(args[1])
 

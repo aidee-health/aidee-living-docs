@@ -2,8 +2,7 @@
 
 import pathlib
 import sys
-from glob import glob
-from os import path
+from pathlib import Path  # Import Path
 
 from jinja2 import Environment
 from jinja2 import FileSystemLoader
@@ -14,9 +13,7 @@ from .feature_file import status_to_style
 
 
 current_directory = pathlib.Path(__file__).parent.resolve()
-env = Environment(
-    autoescape=True, loader=FileSystemLoader(current_directory, followlinks=True)
-)
+env = Environment(autoescape=True, loader=FileSystemLoader(current_directory, followlinks=True))
 template = env.get_template("feature.jinja2")
 
 
@@ -37,12 +34,8 @@ def main(args=None):
         args = sys.argv
 
     if len(args) != 2:
-        print(
-            "Invalid command format, format is:\n {a[0]} <json feature result>\n".format(
-                a=args
-            )
-        )
-        exit(1)
+        print(f"Invalid command format, format is:\n {args[0]} <json feature result>\n")
+        sys.exit(1)
 
     feature = load_feature_file(args[1])
 
@@ -52,8 +45,8 @@ def main(args=None):
         "screenshots_from_step": screenshots_from_step,
     }
 
-    (file_name, _) = path.splitext(args[1])
-    file_name += ".rst"
+    file_path = Path(args[1])
+    file_name = file_path.stem + ".rst"
 
     with open(file_name, "w") as file:
         file.write(template.render(**context))
@@ -61,9 +54,10 @@ def main(args=None):
 
 def process_files_in_current_directory():
     """Process files."""
-    files = glob(path.join(path.curdir, "*.json"))
+    files = Path().glob("*.json")
 
-    for file in files:
+    for file_path_obj in files:
+        file = str(file_path_obj)
         print(f"Converting {file}")
         feature = load_feature_file(file)
 
@@ -73,11 +67,11 @@ def process_files_in_current_directory():
             "screenshots_from_step": screenshots_from_step,
         }
 
-        (file_name, _) = path.splitext(file)
-        file_name += ".rst"
+        file_stem = Path(file).stem
+        file_name = file_stem + ".rst"
 
-        with open(file_name, "w") as file:
-            file.write(template.render(**context))
+        with open(file_name, "w") as f:
+            f.write(template.render(**context))
 
 
 if __name__ == "__main__":
