@@ -7,9 +7,7 @@ from jinja2 import FileSystemLoader
 
 
 current_directory = pathlib.Path(__file__).parent.resolve()
-env = Environment(
-    autoescape=True, loader=FileSystemLoader(current_directory, followlinks=True)
-)
+env = Environment(autoescape=True, loader=FileSystemLoader(current_directory, followlinks=True))
 
 
 def convert_template(filename, context):

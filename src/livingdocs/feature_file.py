@@ -1,17 +1,17 @@
 """Module for creating a BDD feature file."""
 
 import json
-from glob import glob
-from os import path
+import sys  # Import sys
+from pathlib import Path  # Import Path
 
 from .collecting_formatter import CollectedFeature
 
 
 def load_feature_file(feature_path: str):
     """Load a BDD feature file."""
-    if not path.exists(feature_path):
-        print("Unable to find feature file\n")
-        exit(2)
+    if not Path(feature_path).exists():
+        print("Unable to find feature file\\n")
+        sys.exit(2)  # Use sys.exit
 
     with open(feature_path) as file:
         return CollectedFeature.from_json(json.load(file))
@@ -19,10 +19,11 @@ def load_feature_file(feature_path: str):
 
 def load_all_feature_files_in_directory(featurespath: str):
     """Load all BDD feature files in directory."""
-    files = glob(path.join(featurespath, "*.json"))
+    files = Path(featurespath).glob("*.json")
 
     features = []
-    for file in files:
+    for file_path_obj in files:
+        file = str(file_path_obj)
         feature = load_feature_file(file)
         features.append(feature)
 
