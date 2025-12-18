@@ -11,3 +11,6 @@ __pycache__/
 
 .idea/
 *.code-workspace
+
+CLAUDE.md
+/.claude/

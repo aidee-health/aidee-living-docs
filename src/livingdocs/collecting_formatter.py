@@ -137,6 +137,7 @@ class CollectingFormatter(Formatter):
 
     def rule(self, rule):
         self.current_rule = CollectedRule(rule.name, rule.description, rule.tags)
+        assert self.current_feature
         self.current_feature.rules.append(self.current_rule)
 
     def background(self, background):
@@ -164,14 +165,17 @@ class CollectingFormatter(Formatter):
         self.current_step = self.steps_to_process.pop(0)
         self.current_step_text = []
 
-    def result(self, step_result):
+    def result(self, step):
         """Result."""
-        self.current_step.status = step_result.status.name
+        assert self.current_step
+        assert self.current_scenario
+        self.current_step.status = step.status.name
         self.current_step.text = self.current_step_text
-        self.current_step.error_message = step_result.error_message
+        self.current_step.error_message = step.error_message
 
-        self.current_scenario.status = step_result.status.name
+        self.current_scenario.status = step.status.name
 
     def eof(self):
         """End of file reached."""
+        assert self.current_feature
         self.current_feature.finished()
