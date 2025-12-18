@@ -25,6 +25,7 @@ class JSONFormatter(CollectingFormatter):
         """End of file reached."""
         super().eof()
 
+        assert self.current_feature
         if self.singleFile:
             self.features.append(self.current_feature)
         else:

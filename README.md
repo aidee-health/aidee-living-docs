@@ -20,7 +20,7 @@
 ## Features
 
 - Helper functions to generate living documentation with Sphinx and Behave
-- Type safe code using [mypy](https://mypy.readthedocs.io/) for type checking
+- Type safe code using [ty](https://docs.astral.sh/ty/) for type checking
 
 ## Requirements
 
